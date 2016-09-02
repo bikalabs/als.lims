@@ -1,0 +1,13 @@
+<configure
+        xmlns="http://namespaces.zope.org/zope"
+        i18n_domain="als.lims">
+
+    <include package="archetypes.schemaextender"/>
+
+    <adapter name='als.lims' factory=".batch.BatchSchemaExtender" />
+    <adapter name='als.lims' factory=".batch.BatchSchemaModifier" />
+
+    <adapter name='als.lims' factory=".analysisrequest.AnalysisRequestSchemaExtender" />
+    <adapter name='als.lims' factory=".analysisrequest.AnalysisRequestSchemaModifier" />
+
+</configure>

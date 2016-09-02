@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+
+<object name="portal_properties" meta_type="Plone Properties Tool">
+
+ <object name="navtree_properties" meta_type="Plone Property Sheet">
+  <property name="metaTypesNotToList" type="lines" purge="false">
+    <element value="Batch"/>
+  </property>
+</object>
+
+</object>
+
+
+
+
+

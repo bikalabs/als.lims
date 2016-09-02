@@ -1,0 +1,23 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:cmf="http://namespaces.zope.org/cmf">
+
+  <!-- Zope 3 browser resources -->
+
+  <browser:resourceDirectory
+      name="als.lims.images"
+      directory="images"
+      />
+
+  <browser:resourceDirectory
+      name="als.lims.css"
+      directory="css"
+      />
+
+  <browser:resourceDirectory
+      name="als.lims.js"
+      directory="js"
+      />
+
+</configure>

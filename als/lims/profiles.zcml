@@ -1,0 +1,36 @@
+<configure
+        xmlns="http://namespaces.zope.org/zope"
+        xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+        i18n_domain="als.lims">
+
+    <genericsetup:registerProfile
+            name="default"
+            title="ALS LIMS"
+            directory="profiles/default"
+            description='ALS LIMS installation profile'
+            provides="Products.GenericSetup.interfaces.EXTENSION"/>
+
+    <genericsetup:importStep
+            name="als.lims.various"
+            title="ALS LIMS: custom python setup actions"
+            description="als.lims.setuphandlers.setupVarious"
+            handler="als.lims.setuphandlers.setupVarious">
+        <depends name="content"/>
+    </genericsetup:importStep>
+
+    <genericsetup:registerProfile
+            name="uninstall"
+            title="als.lims uninstall profile"
+            directory="profiles/uninstall"
+            description="Uninstalls the als.lims add-on"
+            provides="Products.GenericSetup.interfaces.EXTENSION"
+    />
+
+    <genericsetup:importStep
+            name="als.lims-uninstall"
+            title="als.lims uninstall handler"
+            description="Import step run during ininstalling als.lims"
+            handler=".setuphandlers.uninstall">
+    </genericsetup:importStep>
+
+</configure>

@@ -1,0 +1,12 @@
+<configure
+        xmlns="http://namespaces.zope.org/zope"
+        xmlns:plone="http://namespaces.plone.org/plone"
+        i18n_domain="als.lims">
+
+    <plone:static
+            directory="stickers"
+            type="stickers"
+            name="als-stickers"
+    />
+
+</configure>

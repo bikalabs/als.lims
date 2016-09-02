@@ -1,0 +1,37 @@
+<tal:sticker define="
+    item           python:view.current_item;
+    ar             python:item if item.portal_type == 'AnalysisRequest' else None;
+    sample         python:item if item.portal_type == 'Sample' else None;
+    ar             python:sample.getAnalysisRequests()[0] if sample else ar if ar else None;
+    sample         python:ar.getSample() if ar else sample if sample else None;
+    client         python:ar.getClient();
+    clientid       python:client.getClientID();
+    sampletype     python:sample.getSampleType().Title();
+    samplepoint    python:sample.getSamplePoint().Title() if sample.getSamplePoint() else '';
+    SamplingDate   python:ar.getSamplingDate().Date() if ar.getSamplingDate() else '';
+    csid           python:sample.getClientSampleID();
+    analyses       python:ar.getAnalyses(cancellation_state='active', review_state='sample_received', full_objects=1);">
+
+    <table cellpadding="0" cellspacing="0">
+        <tr>
+            <td class="large-font">
+                <span tal:content="python:ar.id"/>&NBSP;
+                <span tal:content="python:samplepoint"/>
+        </tr>
+        <tr>
+            <td class="large-font">
+                <span tal:content="python:sampletype"/>&NBSP;
+                <span tal:content="python:clientid"/>&NBSP;
+                <span tal:content="python:csid"/>
+            </td>
+        </tr>
+        <tr>
+            <td class="small-font">
+                <span tal:repeat="analysis analyses" tal:content="python:analysis.getService().getShortTitle() if analysis.getService().getShortTitle() else analysis.getService().getKeyword()">
+                    &NBSP;
+                </span>
+            </td>
+        </tr>
+    </table>
+
+</tal:sticker>

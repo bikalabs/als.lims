@@ -1,0 +1,14 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="als.lims">
+
+    <browser:page
+            for="bika.lims.interfaces.IBatchFolder"
+            name="base_view"
+            class="als.lims.browser.batchfolder.BatchFolderContentsView"
+            permission="cmf.ListFolderContents"
+            layer="bika.lims.interfaces.IBikaLIMS"
+    />
+
+</configure>
