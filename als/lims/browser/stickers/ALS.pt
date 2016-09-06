@@ -1,37 +1,46 @@
 <tal:sticker define="
-    item           python:view.current_item;
-    ar             python:item if item.portal_type == 'AnalysisRequest' else None;
-    sample         python:item if item.portal_type == 'Sample' else None;
-    ar             python:sample.getAnalysisRequests()[0] if sample else ar if ar else None;
-    sample         python:ar.getSample() if ar else sample if sample else None;
-    client         python:ar.getClient();
-    clientid       python:client.getClientID();
-    sampletype     python:sample.getSampleType().Title();
-    samplepoint    python:sample.getSamplePoint().Title() if sample.getSamplePoint() else '';
-    SamplingDate   python:ar.getSamplingDate().Date() if ar.getSamplingDate() else '';
-    csid           python:sample.getClientSampleID();
-    analyses       python:ar.getAnalyses(cancellation_state='active', review_state='sample_received', full_objects=1);">
+    item             view/current_item;
+    ar               python:item[0];
+    ar_id            python:ar.getId() if ar else '';
+    sample           python:item[1];
+    part             python:item[2];
+    client           python:ar.getClient();
+    clientid         python:client.getClientID();
+    sampletype       python:sample.getSampleType().Title();
+    samplepoint      python:sample.getSamplePoint().Title() if sample.getSamplePoint() else '';
+    SamplingDate     python:ar.getSamplingDate().Date() if ar.getSamplingDate() else '';
+    csid             python:sample.getClientSampleID();
+    show_partitions  python:context.bika_setup.getShowPartitions();
+    smart_id         python:part.getId() if show_partitions else sample.getId();
+    analyses         python:ar.getAnalyses(cancellation_state='active', review_state='sample_received', full_objects=1);">
 
     <table cellpadding="0" cellspacing="0">
         <tr>
-            <td class="large-font">
-                <span tal:content="python:ar.id"/>&NBSP;
-                <span tal:content="python:samplepoint"/>
-        </tr>
+            <td class="large-font"><span tal:content="python:sample.id"/></td>
+            <td align="right" class="large-font"><span tal:content="python:samplepoint"/></td>
+         </tr>
+    </table>
+    <table cellpadding="0" cellspacing="0">
         <tr>
-            <td class="large-font">
-                <span tal:content="python:sampletype"/>&NBSP;
-                <span tal:content="python:clientid"/>&NBSP;
-                <span tal:content="python:csid"/>
-            </td>
+            <td><span class="small-font"  tal:content="python:sampletype"/> </td>
+            <td align="right"><span class="small-font"  tal:content="python:clientid"/> </td>
+            <td align="right"><span class="large-font"  tal:content="python:csid"/> </td>
         </tr>
+    </table>
+    <table cellpadding="0" cellspacing="0">
         <tr>
-            <td class="small-font">
-                <span tal:repeat="analysis analyses" tal:content="python:analysis.getService().getShortTitle() if analysis.getService().getShortTitle() else analysis.getService().getKeyword()">
-                    &NBSP;
-                </span>
+            <td class="small-font" colspan="3">
+                <span tal:repeat="analysis analyses" tal:content="python:analysis.getService().getShortTitle() if analysis.getService().getShortTitle() else analysis.getService().getKeyword()"/>
             </td>
         </tr>
     </table>
+    <!-- Barcode -->
+    <div class="barcode"
+         tal:attributes="data-id python:sample.id;"
+         data-code="code128"
+         data-barHeight="12"
+         data-addQuietZone="true"
+         data-showHRI="false">
+    </div>
 
 </tal:sticker>
