@@ -19,27 +19,27 @@
     portal_url        portal_state/portal_url;
     item              view/current_item;
     ar                python:item[0];
-    client            python:ar.getClient();
-    clientid          python:client.getClientID();
-    ar_id             python:ar.getId() if ar else '';
     sample            python:item[1];
-    csid              python:sample.getClientSampleID();
     part              python:item[2];
-    partnr            python:part.getId().split('-')[1];
-    sampler           python:sample.getSampler();
+    client            python:sample.aq_parent;
+    clientid          python:client.getClientID() if ar else '';
+    ar_id             python:ar.getId() if ar else '';
+    csid              python:sample.getClientSampleID() if hasattr(sample, 'getClientSampleID') else '';
+    partnr            python:part.getId().split('-')[1] if part else '';
+    sampler           python:sample.getSampler() if hasattr(sample, 'getSampler') else '';
     sample_id         python:sample.getId();
-    sample_point      python:sample.getSamplePoint() and sample.getSamplePoint().Title() or '';
-    sample_type       python:sample.getSampleType().Title();
-    sampling_date     python:sample.getSamplingDate() and sample.getSamplingDate().Date();
-    client_sample_id  python:sample.getClientSampleID();
-    preservation      python:part.getPreservation() and part.getPreservation().Title() or '';
-    container         python:part.getContainer() and part.getContainer().Title() or '';
-    date_sampled      python:sample.getDateSampled() and sample.getDateSampled().Date();
-    analyses          python:part.getBackReferences('AnalysisSamplePartition');
+    sample_point      python:sample.getSamplePoint().Title() if hasattr(sample, 'getSamplePoint') and sample.getSamplePoint() else '';
+    sample_type       python:sample.getSampleType().Title() if hasattr(sample, 'getSampleType') else '';
+    sampling_date     python:sample.getSamplingDate().Date() if hasattr(sample, 'getSamplingDate') else '';
+    date_sampled      python:sample.getDateSampled().Date() if hasattr(sample, 'getDateSampled') and sample.getDateSampled() else '';
+    client_sample_id  python:sample.getClientSampleID() if hasattr(sample, 'getClientSampleID') else '';
+    preservation      python:part.getPreservation().Title() if part and part.getPreservation() else '';
+    container         python:part.getContainer().Title() if part and part.getContainer() else '';
+    analyses          python:part.getBackReferences('AnalysisSamplePartition') if part else [];
     field_analyses    python:[analysis for analysis in analyses if analysis.getService().getPointOfCapture()=='field'];
     show_partitions   python:context.bika_setup.getShowPartitions();
-    smart_id          python:part.getId() if show_partitions else sample.getId();
-    hazardous         python:sample.getSampleType().getHazardous();">
+    smart_id          python:part.getId() if part and show_partitions else sample.getId();
+    hazardous         python:sample.getSampleType().getHazardous() if hasattr(sample, 'getSampleType') else '';">
 
     <div class="stickerbody">
         <!-- Sample ID -->

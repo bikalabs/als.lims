@@ -1,19 +1,19 @@
 @page {
-    size: 48mm 38mm;
+    size: 45mm 35mm;
     margin: 0px !important;
     padding: 0px !important;
 }
 .sticker {
     font-family: Helvetica, Arial;
     font-size:6pt;
-    width: 45mm;
-    max-width: 45mm;
-    height: 35mm;
-    max-height: 35mm;
+    width: 43mm;
+    max-width: 43mm;
+    height: 33mm;
+    max-height: 33mm;
 }
 .stickerbody {
-    height:27mm;
-    max-height:27mm;
+    height:25mm;
+    max-height:25mm;
 }
 .large-font {
     font-size:9pt !important;
@@ -23,7 +23,7 @@
 }
 table {
     border-collapse:collapse;
-    width:45mm;
+    width:43mm;
     margin:0;
     padding:0;
     /*border:1px solid #ddd;*/
@@ -32,19 +32,16 @@ table {
 .sticker .row-1 {
     text-align:center;
     padding-bottom:1px;
-    height:2em !important;
 }
 
 .sticker .row-2 {
     text-align:center;
     padding-bottom:1px;
-    height:2em !important;
 }
 
 .sticker .row-3 {
     text-align:center;
     padding-bottom:1px;
-    height:2em !important;
 }
 
 .sticker .row-4 {
