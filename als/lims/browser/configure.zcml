@@ -9,4 +9,10 @@
             name="als-stickers"
     />
 
+    <plone:static
+            directory="reports"
+            type="reports"
+            name="als-reports"
+    />
+
 </configure>
