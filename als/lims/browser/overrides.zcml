@@ -1,13 +1,40 @@
 <configure
-    xmlns="http://namespaces.zope.org/zope"
-    xmlns:browser="http://namespaces.zope.org/browser"
-    i18n_domain="als.lims">
+        xmlns="http://namespaces.zope.org/zope"
+        xmlns:browser="http://namespaces.zope.org/browser"
+        i18n_domain="als.lims">
 
     <browser:page
             for="bika.lims.interfaces.IBatchFolder"
             name="base_view"
             class="als.lims.browser.batchfolder.BatchFolderContentsView"
             permission="cmf.ListFolderContents"
+            layer="bika.lims.interfaces.IBikaLIMS"
+    />
+
+    <!-- main site/analysisrequests view -->
+    <browser:page
+            for="bika.lims.interfaces.IAnalysisRequestsFolder"
+            name="base_view"
+            class="als.lims.browser.analysisrequests.AnalysisRequestsView"
+            permission="bika.lims.ManageAnalysisRequests"
+            layer="bika.lims.interfaces.IBikaLIMS"
+    />
+
+    <!-- Client ARs -->
+    <browser:page
+            for="bika.lims.interfaces.IClient"
+            name="base_view"
+            class="als.lims.browser.analysisrequests.ClientAnalysisRequestsView"
+            permission="zope2.View"
+            layer="bika.lims.interfaces.IBikaLIMS"
+    />
+
+    <!-- Batch ARs -->
+    <browser:page
+            for="bika.lims.interfaces.IBatch"
+            name="analysisrequests"
+            class="als.lims.browser.analysisrequests.BatchAnalysisRequestsView"
+            permission="zope2.View"
             layer="bika.lims.interfaces.IBikaLIMS"
     />
 

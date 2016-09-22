@@ -47,6 +47,13 @@ class AnalysisRequestSchemaModifier(object):
                                   'ClientReference',
                                   'ReportDryMatter',
                                   'Composite',
+                                  'SamplingDate',
+                                  'DefaultContainerType',
                                   ])
+
+        # SamplingDate is not a required field, if SWE is enabled
+        swe = self.context.bika_setup.getSamplingWorkflowEnabled()
+        if swe:
+            schema['SamplingDate'].required = False
 
         return schema

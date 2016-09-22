@@ -10,4 +10,7 @@
     <adapter name='als.lims' factory=".analysisrequest.AnalysisRequestSchemaExtender" />
     <adapter name='als.lims' factory=".analysisrequest.AnalysisRequestSchemaModifier" />
 
+    <adapter name='als.lims' factory=".sample.SampleSchemaExtender" />
+    <adapter name='als.lims' factory=".sample.SampleSchemaModifier" />
+
 </configure>
