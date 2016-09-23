@@ -30,7 +30,7 @@
     sample_id         python:sample.getId();
     sample_point      python:sample.getSamplePoint().Title() if hasattr(sample, 'getSamplePoint') and sample.getSamplePoint() else '';
     sample_type       python:sample.getSampleType().Title() if hasattr(sample, 'getSampleType') else '';
-    sampling_date     python:sample.getSamplingDate().Date() if hasattr(sample, 'getSamplingDate') else '';
+    sampling_date     python:sample.getSamplingDate().Date() if hasattr(sample, 'getSamplingDate') and sample.getSamplingDate() else '';
     date_sampled      python:sample.getDateSampled().Date() if hasattr(sample, 'getDateSampled') and sample.getDateSampled() else '';
     client_sample_id  python:sample.getClientSampleID() if hasattr(sample, 'getClientSampleID') else '';
     preservation      python:part.getPreservation().Title() if part and part.getPreservation() else '';
@@ -47,29 +47,25 @@
             <table cellpadding="0" cellspacing="0">
                 <tr>
                     <td class="large-font"><span tal:content="python:sample.id"/></td>
-                    <td class="large-font"><span tal:content="python:sample_point"/></td>
+                    <td class="large-font"><span tal:content="python:csid"/> </td>
                 </tr>
             </table>
         </div>
-
-
         <div class="row-2">
             <table cellpadding="0" cellspacing="0">
                 <tr>
                     <td><span class="large-font"  tal:content="python:sample_type"/> </td>
+                    <td class="large-font"><span tal:content="python:sample_point"/></td>
+                </tr>
+            </table>
+        </div>
+        <div class="row-3">
+            <table cellpadding="0" cellspacing="0">
+                <tr>
                     <td><span class="large-font"  tal:content="python:clientid"/> </td>
                 </tr>
             </table>
         </div>
-
-        <div class="row-3">
-            <table cellpadding="0" cellspacing="0">
-                <tr>
-                    <td><span class="large-font"  tal:content="python:csid"/> </td>
-                </tr>
-            </table>
-        </div>
-
         <div class="row-4">
             <table cellpadding="0" cellspacing="0">
                 <tr>
@@ -87,8 +83,8 @@
          tal:attributes="data-id smart_id;"
          data-code="code39"
          data-barHeight="14"
-         data-addQuietZone="true"
-         data-showHRI="false">
+         addQuietZone="false"
+         showHRI="false">
     </div>
 
 </tal:sticker>
