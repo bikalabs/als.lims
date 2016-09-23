@@ -3,7 +3,7 @@ from bika.lims.browser.analysisrequest.analysisrequests import \
 from bika.lims.browser.batch.analysisrequests import \
     AnalysisRequestsView as BARV
 from bika.lims.browser.client.views.analysisrequests import \
-    AnalysisRequestsView as CARV
+    ClientAnalysisRequestsView as CARV
 from plone.app.content.browser.interfaces import IFolderContentsView
 from zope.interface import implements
 
