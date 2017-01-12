@@ -20,3 +20,11 @@ output.xml
 report.html
 selenium-screenshot*
 *.pyc
+.mr.developer.cfg
+.projectile
+bin
+develop-eggs
+eggs
+parts
+src
+var
