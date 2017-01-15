@@ -76,15 +76,13 @@
                 </tr>
             </table>
         </div>
-    </div>
-
-    <!-- Barcode -->
-    <div class="barcode"
-         tal:attributes="data-id smart_id;"
-         data-code="code39"
-         data-barHeight="14"
-         addQuietZone="false"
-         showHRI="false">
+        <div class="barcode"
+             tal:attributes="data-id smart_id;"
+             data-code="code39"
+             data-barHeight="14"
+             addQuietZone="false"
+             showHRI="false">
+        </div>
     </div>
 
 </tal:sticker>

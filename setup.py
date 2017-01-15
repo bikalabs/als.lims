@@ -10,13 +10,7 @@ def read(*rnames):
 setup(name='als.lims',
       version=version,
       description="ALS LIMS",
-      long_description=read("README.rst") + \
-                       read("CHANGES.rst") + \
-                       "\n\n" + \
-                       "Authors and maintainers\n" + \
-                       "-----------------------\n" + \
-                       "- Bika Lab Systems, http://bikalabs.com\n" + \
-                       "- Naralabs, http://naralabs.com",
+      long_description=read("readme.md"),
       # Get more strings from
       # http://pypi.python.org/pypi?:action=list_classifiers
       classifiers=[

@@ -55,4 +55,5 @@ table {
 .barcode {
   font-size:80%;
   text-align:center;
+  height:14px;
 }
