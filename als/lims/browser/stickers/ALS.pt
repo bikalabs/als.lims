@@ -1,8 +1,9 @@
 <!--
     Default template used to render one barcode small sticker
 
-    To retrieve the item, use view.current_item, that will return an array with
-    the following structure:
+    To retrieve the item, use view.current_item.
+
+    The item can be an AR, or a sample, or a partition..
 
     [analysis_request_object, sample_object, sample_partition_object]
 
@@ -16,8 +17,8 @@
 -->
 <tal:sticker define="
     portal_state      context/@@plone_portal_state;
-    portal_url        portal_state/portal_url;
-    item              view/current_item;
+    portal_url        python:portal_state.portal_url;
+    item              python:view.current_item;
     ar                python:item[0];
     sample            python:item[1];
     part              python:item[2];
