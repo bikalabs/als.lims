@@ -1,59 +1,41 @@
 @page {
     size: 44mm 34mm;
-    margin: 0px !important;
-    padding: 0px !important;
+    margin: 0mm !important;
+    padding: 0mm !important;
 }
 
 .sticker {
     font-family: Helvetica, Arial;
     font-size:6pt;
-    width: 40mm;
-    max-width: 40mm;
-    height: 30mm;
-    max-height: 30mm;
+    width: 42mm;
+    max-width: 42mm;
+    height: 32mm;
+    max-height: 32mm;
 }
 
 .stickerbody {
-    margin-bottom:2px;
+    margin-bottom:2mm;
+    height:32mm;
 }
 
 .large-font {
-    font-size:9pt !important;
+    font-size:11pt !important;
 }
 
 .small-font {
-    font-size:6pt !important;
+    font-size:8pt !important;
 }
 
-table {
-    border-collapse:collapse;
-    width:40mm;
-    margin:0;
-    padding:0;
-/*    border:1px solid #ddd;*/
-}
-
-.sticker .row-1 {
+.sticker .row {
     text-align:center;
-    padding-bottom:1px;
 }
 
-.sticker .row-2 {
-    text-align:center;
-    padding-bottom:1px;
-}
-
-.sticker .row-3 {
-    text-align:center;
-    padding-bottom:1px;
-}
-
-.sticker .row-4 {
-    text-align:center;
+.barcode-container{
+  padding-top:.5mm;
 }
 
 .barcode {
-  font-size:80%;
-  text-align:center;
-  height:14px;
+    font-size:75%;
+    width: 50%;
+    margin: 0 auto;
 }

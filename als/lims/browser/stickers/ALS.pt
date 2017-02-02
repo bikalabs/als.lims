@@ -1,89 +1,50 @@
-<!--
-    Default template used to render one barcode small sticker
-
-    To retrieve the item, use view.current_item.
-
-    The item can be an AR, or a sample, or a partition..
-
-    [analysis_request_object, sample_object, sample_partition_object]
-
-    Although sample_object (position 1 in the array) will never be None,
-    analysis_request_object can be None when
-    a) The user requested to render stickers for samples (instead of ARs) or
-    b) The user requested to render stickers for sample partitions or
-    c) The user requested to render stickers for reference samples.
-
-    If c), both analysis_request_object and sample_partition_object will be None
--->
 <tal:sticker define="
-    portal_state      context/@@plone_portal_state;
-    portal_url        python:portal_state.portal_url;
     item              python:view.current_item;
     ar                python:item[0];
     sample            python:item[1];
     part              python:item[2];
     client            python:sample.aq_parent;
-    clientid          python:client.getClientID() if ar else '';
     ar_id             python:ar.getId() if ar else '';
+    sid               python:sample.getId() if sample else '';
     csid              python:sample.getClientSampleID() if hasattr(sample, 'getClientSampleID') else '';
-    partnr            python:part.getId().split('-')[1] if part else '';
-    sampler           python:sample.getSampler() if hasattr(sample, 'getSampler') else '';
-    sample_id         python:sample.getId();
-    sample_point      python:sample.getSamplePoint().Title() if hasattr(sample, 'getSamplePoint') and sample.getSamplePoint() else '';
-    sample_type       python:sample.getSampleType().Title() if hasattr(sample, 'getSampleType') else '';
-    sampling_date     python:sample.getSamplingDate().Date() if hasattr(sample, 'getSamplingDate') and sample.getSamplingDate() else '';
-    date_sampled      python:sample.getDateSampled().Date() if hasattr(sample, 'getDateSampled') and sample.getDateSampled() else '';
-    client_sample_id  python:sample.getClientSampleID() if hasattr(sample, 'getClientSampleID') else '';
-    preservation      python:part.getPreservation().Title() if part and part.getPreservation() else '';
-    container         python:part.getContainer().Title() if part and part.getContainer() else '';
-    analyses          python:part.getBackReferences('AnalysisSamplePartition') if part else [];
-    field_analyses    python:[analysis for analysis in analyses if analysis.getService().getPointOfCapture()=='field'];
-    show_partitions   python:context.bika_setup.getShowPartitions();
-    smart_id          python:part.getId() if part and show_partitions else sample.getId();
-    hazardous         python:sample.getSampleType().getHazardous() if hasattr(sample, 'getSampleType') else '';">
+    profile           python:ar.getProfiles()[0].Title() if ar and ar.getProfiles() else '';">
 
-    <div class="stickerbody">
-        <!-- Sample ID -->
-        <div class="row-1">
-            <table cellpadding="0" cellspacing="0">
-                <tr>
-                    <td class="large-font"><span tal:content="python:sample.id"/></td>
-                    <td class="large-font"><span tal:content="python:csid"/> </td>
-                </tr>
-            </table>
-        </div>
-        <div class="row-2">
-            <table cellpadding="0" cellspacing="0">
-                <tr>
-                    <td><span class="large-font"  tal:content="python:sample_type"/> </td>
-                    <td class="large-font"><span tal:content="python:sample_point"/></td>
-                </tr>
-            </table>
-        </div>
-        <div class="row-3">
-            <table cellpadding="0" cellspacing="0">
-                <tr>
-                    <td><span class="large-font"  tal:content="python:clientid"/> </td>
-                </tr>
-            </table>
-        </div>
-        <div class="row-4">
-            <table cellpadding="0" cellspacing="0">
-                <tr>
-                    <td class="small-font">
-                        <span tal:repeat="analysis analyses"
-                              tal:content="python:analysis.getService().getShortTitle() if analysis.getService().getShortTitle() else analysis.getService().getKeyword()"/>
-                    </td>
-                </tr>
-            </table>
-        </div>
+<div class="stickerbody">
+    <div class="barcode-container">
         <div class="barcode"
-             tal:attributes="data-id smart_id;"
+             tal:attributes="data-id sid;"
              data-code="code39"
              data-barHeight="14"
              addQuietZone="false"
              showHRI="false">
         </div>
     </div>
+    <!-- Bika Sample ID -->
+    <div class="row large-font">
+        <span tal:content="python:sid">
+            BSID-0001
+        </span>
+    </div>
+    <div class="row large-font">
+        <span tal:content="python:csid">
+            CSID-0001
+        </span>
+    </div>
+    <div class="row large-font">
+        <span tal:content="python:profile">
+            Sample Analysis Mask
+        </span>
+    </div>
+    <div class="row small-font">
+        <span tal:content="python:client.Title()">
+            Client Name Here
+        </span>
+    </div>
+    <div class="row small-font">
+        <span tal:content="python:view.ulocalized_time(sample.getDateReceived(), long_format=True)">
+            Date Received
+        </span>
+    </div>
+</div>
 
 </tal:sticker>
