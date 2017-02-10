@@ -49,13 +49,12 @@ class AnalysisRequestSchemaModifier(object):
                                   'Composite',
                                   'SamplingDate',
                                   'DefaultContainerType',
+                                  # ALS uses only DateSampled and Sampler fields
+                                  # SamplingDate is just confusing them and us.
+                                  'SamplingDate',
                                   ])
 
-        # SamplingDate is not a required field, if SWE is enabled
-        swe = self.context.bika_setup.getSamplingWorkflowEnabled()
-        if swe:
-            schema['SamplingDate'].required = False
-
-        # LIMS-
+        # SamplingDate is not a required field!
+        schema['SamplingDate'].required = False
 
         return schema
