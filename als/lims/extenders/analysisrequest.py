@@ -32,29 +32,36 @@ class AnalysisRequestSchemaModifier(object):
     def hide_fields(self, schema, fieldnames):
         """Hide fields ALS doesn't care to see
         """
-        for fn in fieldnames:
-            if fn in schema:
-                schema[fn].widget.visible = {'view': 'invisible',
-                                             'edit': 'invisible'}
 
     def fiddle(self, schema):
         """
         """
 
-        self.hide_fields(schema, ['SubGroup',
-                                  'StorageLocation',
-                                  'ClientOrderNumber',
-                                  'ClientReference',
-                                  'ReportDryMatter',
-                                  'Composite',
-                                  'SamplingDate',
-                                  'DefaultContainerType',
-                                  # ALS uses only DateSampled and Sampler fields
-                                  # SamplingDate is just confusing them and us.
-                                  'SamplingDate',
-                                  ])
+        fieldnames = [
+            'SubGroup',
+            'StorageLocation',
+            'ClientOrderNumber',
+            'ClientReference',
+            'ReportDryMatter',
+            'Composite',
+            'SamplingDate',
+            'DefaultContainerType',
+            # ALS uses only DateSampled and Sampler fields
+            # SamplingDate is just confusing them and us.
+            'SamplingDate',
+        ]
+
+        for fn in fieldnames:
+            if fn in schema:
+                schema[fn].widget.visible = {
+                    'view': 'invisible',
+                    'edit': 'invisible'}
 
         # SamplingDate is not a required field!
         schema['SamplingDate'].required = False
+
+        # Sampler and DateSampled are now visible on AR Add.
+        schema['Sampler'].widget.visible['add'] = 'edit'
+        schema['DateSampled'].widget.visible['add'] = 'edit'
 
         return schema
