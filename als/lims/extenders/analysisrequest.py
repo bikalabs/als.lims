@@ -56,9 +56,7 @@ class AnalysisRequestSchemaModifier(object):
                 schema[fn].widget.visible = {
                     'view': 'invisible',
                     'edit': 'invisible'}
-
-        # SamplingDate is not a required field!
-        schema['SamplingDate'].required = False
+                schema[fn].required = False
 
         # Sampler and DateSampled are now visible on AR Add.
         schema['Sampler'].widget.visible['add'] = 'edit'
