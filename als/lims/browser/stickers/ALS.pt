@@ -7,44 +7,53 @@
     ar_id             python:ar.getId() if ar else '';
     sid               python:sample.getId() if sample else '';
     csid              python:sample.getClientSampleID() if hasattr(sample, 'getClientSampleID') else '';
-    profile           python:ar.getProfiles()[0].Title() if ar and ar.getProfiles() else '';">
+    profile           python:ar.getProfiles()[0].Title() if ar and ar.getProfiles() else '';
+    date              python:ar.getDateSampled();
+    date              python:date if date else ar.getDateReceived();
+    date              python:date if date else ar.created();">
 
-<div class="stickerbody">
-    <div class="barcode-container">
-        <div class="barcode"
-             tal:attributes="data-id sid;"
-             data-code="code39"
-             data-barHeight="14"
-             addQuietZone="false"
-             showHRI="false">
-        </div>
+    <!-- Barcode -->
+    <div class="barcode"
+         tal:attributes="data-id sid;"
+         data-code="code39"
+         data-barHeight="14"
+         addQuietZone="false"
+         showHRI="false">
     </div>
+
     <!-- Bika Sample ID -->
     <div class="row large-font">
         <span tal:content="python:sid">
             BSID-0001
         </span>
     </div>
-    <div class="row large-font">
-        <span tal:content="python:csid">
-            CSID-0001
-        </span>
-    </div>
-    <div class="row large-font">
-        <span tal:content="python:profile">
-            Sample Analysis Mask
-        </span>
-    </div>
+
+    <!-- Client Name -->
     <div class="row small-font">
         <span tal:content="python:client.Title()">
             Client Name Here
         </span>
     </div>
-    <div class="row small-font">
-        <span tal:content="python:view.ulocalized_time(sample.getDateReceived(), long_format=True)">
-            Date Received
+
+    <!-- Client Sample ID -->
+    <div class="row large-font">
+        <span tal:content="python:csid">
+            CSID-0001
         </span>
     </div>
-</div>
+
+    <!-- Profile -->
+    <div class="row large-font">
+        <span tal:content="python:profile">
+            Sample Analysis Mask
+        </span>
+    </div>
+
+    <!-- Date Sampled (or recieved, or created, if none) -->
+    <div class="row small-font">
+        <span tal:content="python:view.ulocalized_time(date)">
+            Date
+        </span>
+    </div>
 
 </tal:sticker>

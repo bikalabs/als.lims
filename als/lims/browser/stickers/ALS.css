@@ -1,21 +1,19 @@
 @page {
     size: 44mm 34mm;
-    margin: 0mm !important;
-    padding: 0mm !important;
+    margin: 0mm 0mm 0mm 0mm !important;
+    padding: 0mm 0mm 0mm 0mm !important;
+}
+
+.sticker * {
+    text-align: center;
+    margin: 0 auto;
 }
 
 .sticker {
     font-family: Helvetica, Arial;
     font-size:6pt;
-    width: 42mm;
-    max-width: 42mm;
-    height: 32mm;
-    max-height: 32mm;
-}
-
-.stickerbody {
-    margin-bottom:2mm;
-    height:32mm;
+    width: 44mm; max-width: 44mm;
+    height: 34mm; max-height: 34mm;
 }
 
 .large-font {
@@ -26,16 +24,10 @@
     font-size:8pt !important;
 }
 
-.sticker .row {
-    text-align:center;
-}
-
-.barcode-container{
-  padding-top:.5mm;
+.row {
+  padding-top: 1px;
 }
 
 .barcode {
-    font-size:75%;
-    width: 50%;
-    margin: 0 auto;
+  margin-bottom: 3px;
 }
