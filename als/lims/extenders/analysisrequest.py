@@ -96,6 +96,25 @@ class AnalysisRequestSchemaModifier(object):
                 schema[fn].widget.visible = {
                     'view': 'invisible',
                     'edit': 'invisible'}
+
+        # hide field from AR add
+        hidefromadd = [
+            'Sample',
+            'SamplingRound',
+            'SamplingDeviation',
+            'EnvironmentalConditions',
+            'AdHoc',
+            'InvoiceExclude',
+            'PreparationWorkflow',
+            'SampleCondition'
+        ]
+
+        for fn in hidefromadd:
+            if fn in schema:
+                schema[fn].widget.visible = {
+                'add': 'invisible',
+                'edit': 'invisible',
+                'view': 'invisible'}
                 schema[fn].required = False
         # hide field from AR add
         hidefromadd = [
