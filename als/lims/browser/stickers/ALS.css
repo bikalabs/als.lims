@@ -1,33 +1,27 @@
 @page {
     size: 44mm 34mm;
-    margin: 0mm 0mm 0mm 0mm !important;
-    padding: 0mm 0mm 0mm 0mm !important;
+    margin: 0mm 0mm 0mm 0mm;
+    padding: 0mm 0mm 0mm 0mm;
 }
 
-.sticker * {
-    text-align: center;
-    margin: 0 auto;
+td {
+    text-align:center;
 }
 
 .sticker {
     font-family: Helvetica, Arial;
     font-size:6pt;
-    width: 44mm; max-width: 44mm;
-    height: 34mm; max-height: 34mm;
+    padding:1mm; width: 44mm; height: 34mm;
 }
-
-.large-font {
-    font-size:11pt !important;
-}
-
 .small-font {
-    font-size:8pt !important;
+    font-size:8pt;
+}
+.large-font {
+    font-size:11pt;
+}
+.sticker .analysisrequest-info table {
+    border-collapse:collapse;
+    margin: 1px 1px 1px 1px;
+    width:100%;
 }
 
-.row {
-  padding-top: 1px;
-}
-
-.barcode {
-  margin-bottom: 3px;
-}
