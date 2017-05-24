@@ -8,6 +8,7 @@
     sid               python:sample.getId() if sample else '';
     csid              python:sample.getClientSampleID() if hasattr(sample, 'getClientSampleID') else '';
     profile           python:ar.getProfiles()[0].Title() if ar and ar.getProfiles() else '';
+    sp                python:sample.getSamplePoint().Title() if sample.getSamplePoint() else '';
     date              python:ar.getDateSampled();
     date              python:date if date else ar.getDateReceived();
     date              python:date if date else ar.created();">
@@ -22,28 +23,37 @@
 
     <div class="analysisrequest-info">
         <table cellpadding="0" cellspacing="0" border="0">
+            <!-- Bika Sample ID -->
             <tr>
-                <!-- Bika Sample ID -->
-                <td class="sample-id large-font" tal:content="sid"/>
+                <td class="sample-id large-font"
+                    tal:content="sid"/>
             </tr>
+            <!-- Client Name -->
             <tr>
-                <!-- Client Name -->
-                <td
-                    class="client-title small-font"
+                <td class="client-title small-font"
                     tal:content="python:client.Title()"/>
             </tr>
+            <!-- Profile -->
             <tr>
-                <!-- Client Sample ID -->
-                <td class="client-sample-id large-font" tal:content="csid"/>
+                <td class="profile large-font"
+                    tal:condition="profile"
+                    tal:content="profile"/>
             </tr>
+            <!-- Client Sample ID -->
             <tr>
-                <!-- Profile -->
-                <td class="profile large-font" tal:content="profile"/>
+                <td class="client-sample-id large-font"
+                    tal:condition="csid"
+                    tal:content="csid"/>
             </tr>
+            <!-- Sample Point -->
             <tr>
-                <!-- Date Sampled (or recieved, or created, if none) -->
-                <td
-                    class="date-sampled small-font"
+                <td class="sample-point large-font"
+                    tal:condition="sp"
+                    tal:content="sp"/>
+            </tr>
+            <!-- Date Sampled (or recieved, or created, if none) -->
+            <tr>
+                <td class="date-sampled small-font"
                     tal:content="python:view.ulocalized_time(date)"/>
             </tr>
         </table>
