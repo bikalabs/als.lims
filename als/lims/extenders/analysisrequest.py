@@ -80,7 +80,6 @@ class AnalysisRequestSchemaModifier(object):
         hidefromviewedit = [
             'SubGroup',
             'StorageLocation',
-            'ClientOrderNumber',
             'ClientReference',
             'ReportDryMatter',
             'Composite',

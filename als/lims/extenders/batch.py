@@ -41,8 +41,7 @@ class BatchSchemaModifier(object):
         """
         """
 
-        self.hide_fields(schema, ["ClientBatchID",
-                                  "description",
+        self.hide_fields(schema, ["description",
                                   "InheritedObjectsUI",
                                   "BatchLabels",
                                   "Remarks"])
