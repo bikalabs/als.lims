@@ -4,24 +4,37 @@
     padding: 0mm 0mm 0mm 0mm;
 }
 
-td {
-    text-align:center;
-}
-
 .sticker {
     font-family: Helvetica, Arial;
-    font-size:6pt;
-    padding:1mm; width: 44mm; height: 34mm;
+    font-size: 6pt;
+    padding: 1mm;
+    width: 44mm;
+    height: 34mm;
 }
+
+.outer {
+    width: 100%;
+    text-align: center;
+}
+
+.barcode {
+    width: 100% !important;
+}
+
+.sticker table {
+    border-collapse: collapse;
+    margin: 1px 1px 1px 1px;
+    width: 100%;
+}
+
+td {
+    text-align: center;
+}
+
 .small-font {
-    font-size:8pt;
+    font-size: 8pt;
 }
 .large-font {
-    font-size:11pt;
-}
-.sticker .analysisrequest-info table {
-    border-collapse:collapse;
-    margin: 1px 1px 1px 1px;
-    width:100%;
+    font-size: 9pt;
 }
 
