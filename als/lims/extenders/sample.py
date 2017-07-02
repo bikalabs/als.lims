@@ -7,18 +7,19 @@ from bika.lims import bikaMessageFactory as _
 from zope.component import adapts
 from zope.interface import implements
 
-SampleConditionText =  ExtStringField(
-        'SampleConditionText',
-        widget=StringWidget(
-            label=_("Sample Condition"),
-            description= "",
-            visible={'view': 'visible',
-                     'edit': 'visible',
-                     'add': 'edit'},
-            render_own_label=True,
-            size=20
-        )
+SampleConditionText = ExtStringField(
+    'SampleConditionText',
+    widget=StringWidget(
+        label=_("Sample Condition"),
+        description="",
+        visible={'view': 'visible',
+                 'edit': 'visible',
+                 'add': 'edit'},
+        render_own_label=True,
+        size=20
     )
+)
+
 
 class SampleSchemaExtender(object):
     adapts(ISample)
@@ -54,7 +55,9 @@ class SampleSchemaModifier(object):
         # SamplingDate is not a required field, if SWE is enabled
         swe = self.context.bika_setup.getSamplingWorkflowEnabled()
         if swe:
-            schema['SamplingDate'].widget.visible = False
+            schema['SamplingDate'].widget.visible = {
+                'view': 'invisible',
+                'edit': 'invisible'}
             schema['SamplingDate'].required = False
 
         schema.moveField("SampleConditionText", after="SamplePoint")
