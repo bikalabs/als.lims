@@ -54,6 +54,7 @@ class SampleSchemaModifier(object):
         # SamplingDate is not a required field, if SWE is enabled
         swe = self.context.bika_setup.getSamplingWorkflowEnabled()
         if swe:
+            schema['SamplingDate'].widget.visible = False
             schema['SamplingDate'].required = False
 
         schema.moveField("SampleConditionText", after="SamplePoint")
