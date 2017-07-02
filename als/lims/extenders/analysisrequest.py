@@ -110,30 +110,9 @@ class AnalysisRequestSchemaModifier(object):
 
         for fn in hidefromadd:
             if fn in schema:
-                schema[fn].widget.visible = {
-                'add': 'invisible',
-                'edit': 'invisible',
-                'view': 'invisible'}
-                schema[fn].required = False
-        # hide field from AR add
-        hidefromadd = [
-            'Sample',
-            'SamplingRound',
-            'SamplingDeviation',
-            'EnvironmentalConditions',
-            'AdHoc',
-            'InvoiceExclude',
-            'PreparationWorkflow',
-            'SampleCondition'
-        ]
-
-        for fn in hidefromadd:
-            if fn in schema:
-                schema[fn].widget.visible = {
-                'add': 'invisible',
-                'edit': 'invisible',
-                'view': 'invisible'}
-
+                if isinstance(schema[fn].widget.visible, dict):
+                    schema[fn].widget.visible = 'invisible'
+                    schema[fn].required = False
 
         # Sampler and DateSampled are now visible on AR Add.
         schema['Sampler'].widget.visible['add'] = 'edit'
