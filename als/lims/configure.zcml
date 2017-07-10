@@ -17,6 +17,9 @@
 
   <cmf:registerDirectory name="skins" directory="skins" recursive="True" />
 
+  <include package="z3c.jbot" file="meta.zcml" />
+  <browser:jbot directory="jbot" />
+
   <include file="permissions.zcml" />
   <include file="behaviours.zcml" />
   <include file="profiles.zcml" />
