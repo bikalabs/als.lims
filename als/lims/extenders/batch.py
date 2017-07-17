@@ -41,9 +41,14 @@ class BatchSchemaModifier(object):
         """
         """
 
-        self.hide_fields(schema, ["description",
+        self.hide_fields(schema, ["BatchID",
+                                  "description",
                                   "InheritedObjectsUI",
                                   "BatchLabels",
                                   "Remarks"])
+
+        schema['title'].validators = ()
+        # Update the validation layer after change the validator in runtime
+        schema['title']._validationLayer()
 
         return schema
