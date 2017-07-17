@@ -1,0 +1,102 @@
+#!/bin/bash
+
+# This is a modification of the template from bika.lims repository,
+# it compiles bika.lims including the bika-custom.pot in the als.lims
+# locales/ folder.
+# All transifex stuff is commented here.
+
+BASE=${buildout:directory}
+I18N=$BASE/bin/i18ndude
+BIKA_BASE=${buildout:directory}/src/bika.lims
+LOCALES=$BIKA_BASE/bika/lims/locales
+ALS_LOCALES=${buildout:directory}/src/als.lims/als/lims/locales
+
+function die() {
+    echo "ERROR: $1"
+}
+
+# Check if we have i18n in place
+if test ! -x $I18N; then
+    echo "You must install i18ndude in your buildout: https://pypi.python.org/pypi/i18ndude"
+    echo "See https://github.com/collective/collective.developermanual/blob/master/source/i18n/localization.txt"
+    die "i18ndude not installed"
+fi
+
+# Check Transifex Installed
+function has_tx() {
+  TX=$(which tx)
+  if test ! -x $TX || test -z $TX; then
+     return -1
+  else
+      return 0
+  fi
+}
+
+# Transifex Pull Function
+function tx_pull() {
+    if has_tx; then
+        cd $LOCALES
+        echo "Transifex Pull"
+        tx pull -a -f
+    else
+        die "Please install the Transifex Client first: $ pip install transifex-client"
+    fi
+    cd $BASE
+}
+
+# Transifex Push Function
+function tx_push() {
+    if has_tx; then
+        cd $LOCALES
+        echo "Transifex Push"
+        tx push -s -t --skip
+    else
+        die "Please install the Transifex Client first: $ pip install transifex-client"
+    fi
+    cd $BASE
+}
+
+# Clean all generated .mo files
+find $LOCALES -name "*.mo" -delete
+
+# Pull Transifex
+#tx_pull
+
+# Generate the Bika Domain
+DOMAIN=bika
+echo "Processing Domain $DOMAIN"
+# Flush the english (transifex source language) po files
+# If we don't do this, new $DOMAIN-manual.pot translations won't be synced.
+echo -n "" > $ALS_LOCALES/en/LC_MESSAGES/$DOMAIN.po
+# Re-scan the source code for new strings
+$I18N rebuild-pot --pot $ALS_LOCALES/$DOMAIN.pot --exclude "build" --create $DOMAIN $BIKA_BASE/bika
+# Merge BIKA manual stuff into TEMP file
+$I18N trmerge $ALS_LOCALES/$DOMAIN.pot $LOCALES/$DOMAIN-manual.pot > $ALS_LOCALES/trmerge.pot
+# Merge ALS manual stuff into TEMP file
+$I18N trmerge $ALS_LOCALES/trmerge.pot $ALS_LOCALES/$DOMAIN-manual.pot > $ALS_LOCALES/$DOMAIN.pot
+# Synchronize all .po files with the new $DOMAIN.pot
+$I18N sync --pot $ALS_LOCALES/$DOMAIN.pot $ALS_LOCALES/*/LC_MESSAGES/$DOMAIN.po
+# remove tmp file
+rm $ALS_LOCALES/trmerge.pot
+echo "Domain $DOMAIN [DONE]"
+
+# Generate Plone Domain
+DOMAIN=plone
+echo "Processing Domain $DOMAIN"
+# Flush the english (transifex source language) po files
+# If we don't do this, new $DOMAIN-manual.pot translations won't be synced.
+echo -n "" > $ALS_LOCALES/en/LC_MESSAGES/$DOMAIN.po
+# Re-scan the source code for new strings
+$I18N rebuild-pot --pot $ALS_LOCALES/$DOMAIN.pot --exclude "build" --create $DOMAIN $BIKA_BASE/bika/lims/profiles
+# Merge BIKA manual stuff into TEMP file
+$I18N trmerge $ALS_LOCALES/$DOMAIN.pot $LOCALES/$DOMAIN-manual.pot > $ALS_LOCALES/trmerge.pot
+# Merge ALS manual stuff into TEMP file
+$I18N trmerge $ALS_LOCALES/trmerge.pot $ALS_LOCALES/$DOMAIN-manual.pot > $ALS_LOCALES/$DOMAIN.pot
+# Synchronize all .po files with the new $DOMAIN.pot
+$I18N sync --pot $ALS_LOCALES/$DOMAIN.pot $ALS_LOCALES/*/LC_MESSAGES/$DOMAIN.po
+# remove tmp file
+rm $ALS_LOCALES/trmerge.pot
+echo "Domain $DOMAIN [DONE]"
+
+# Push Transifex
+#tx_push
