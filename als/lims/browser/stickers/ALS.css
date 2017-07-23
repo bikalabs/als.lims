@@ -4,6 +4,11 @@
     padding: 0mm 0mm 0mm 0mm;
 }
 
+* {
+    margin: 0mm 0mm 0mm 0mm;
+    padding: 0mm 0mm 0mm 0mm;
+}
+
 .sticker {
     font-family: Helvetica, Arial;
     font-size: 6pt;
@@ -13,18 +18,19 @@
 }
 
 .outer {
-    width: 100%;
+    width: 44mm;
     text-align: center;
 }
 
 .barcode {
-    width: 100% !important;
+    width: 42mm !important;
+    padding:0 1mm 0 0;
 }
 
 .sticker table {
     border-collapse: collapse;
     margin: 1px 1px 1px 1px;
-    width: 100%;
+    width: 44mm;
 }
 
 td {
