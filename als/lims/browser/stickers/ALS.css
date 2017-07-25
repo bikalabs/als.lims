@@ -28,6 +28,7 @@
 }
 .barcode object {
     width: 42mm !important;
+    height: 7mm !important;
 }
 
 .sticker table {
