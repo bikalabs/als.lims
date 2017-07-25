@@ -9,9 +9,9 @@
     csid              python:sample.getClientSampleID() if hasattr(sample, 'getClientSampleID') else '';
     profile           python:ar.getProfiles()[0].Title() if ar and ar.getProfiles() else '';
     sp                python:sample.getSamplePoint().Title() if sample.getSamplePoint() else '';
-    date              python:ar.getDateSampled();
-    date              python:date if date else ar.getDateReceived();
-    date              python:date if date else ar.created();">
+    date              python:sample.getDateSampled();
+    date              python:date if date else sample.getDateReceived();
+    date              python:date if date else sample.created();">
 
   <div class="outer">
 
