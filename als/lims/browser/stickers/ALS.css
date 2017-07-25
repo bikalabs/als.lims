@@ -24,7 +24,6 @@
 
 .barcode {
     width: 42mm !important;
-    padding:0 1mm 0 0;
 }
 .barcode object {
     width: 42mm !important;
