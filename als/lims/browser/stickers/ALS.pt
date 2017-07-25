@@ -19,9 +19,10 @@
     <div class="barcode"
          tal:attributes="data-id sid;"
          data-code="code39"
-         data-barHeight="14"
          data-output="bmp"
-         data-showHRI="false">
+         data-showHRI="false"
+         data-barWidth="3"
+         data-barHeight="50">
     </div>
 
     <table cellpadding="0" cellspacing="0" border="0">
