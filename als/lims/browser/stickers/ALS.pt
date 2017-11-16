@@ -21,8 +21,8 @@
          data-code="code39"
          data-output="bmp"
          data-showHRI="false"
-         data-barWidth="17"
-         data-barHeight="330">
+         data-barWidth="7"
+         data-barHeight="100">
     </div>
 
     <table cellpadding="0" cellspacing="0" border="0">
